@@ -2,7 +2,7 @@ package coen448_project;
 
 public class Room {
 	private boolean[][] room;
-	private WalkingRobot robot;
+	public WalkingRobot robot;
 	
 	public Room(int roomSize) {
 		this.room = new boolean[roomSize][roomSize];
@@ -71,8 +71,6 @@ public class Room {
 					break;
 			}
 		}
-
-
 	}
 	public String printRoom() {
 		int maxX = robot.getMaxX();

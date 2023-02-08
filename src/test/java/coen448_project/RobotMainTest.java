@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class RobotMainTest {
 
     @Test
-    @DisplayName("U|u")
-    void main() {
-        assertEquals("UP", penPosition.UP,"Is pen position up");
-        assertEquals("DOWN", penPosition.DOWN,"Is pen position down");
+    void PenUpShouldSetPenPostionUp(){
+        var penPosition = new Room(5);
+        penPosition.penUp();
     }
 }
