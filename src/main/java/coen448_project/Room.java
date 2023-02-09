@@ -108,9 +108,10 @@ public class Room {
 			);
 	}
 	
-	public void stop() {
+	public Boolean stop() {
 		// Might not be needed
-	}
+        return false;
+    }
 	
 	public void initialize(int n) throws Exception {
 		this.robot.setCurDirection(direction.NORTH);

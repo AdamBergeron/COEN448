@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoomTest {
 
     @Test
-    void penUp() {
+    void penUpTest() {
         Room room = new Room(10);
         room.penUp();
         assertEquals( penPosition.UP, room.robot.getCurPenPosition());
@@ -15,14 +15,14 @@ class RoomTest {
     }
 
     @Test
-    void penDown() {
+    void penDownTest() {
         Room room = new Room(10);
         room.penDown();
         assertEquals( penPosition.DOWN, room.robot.getCurPenPosition());
     }
 
     @Test
-    void turnRight() {
+    void turnRightTest() {
         Room room = new Room(10);
         room.robot.setCurDirection(direction.SOUTH);
         room.turnRight();
@@ -36,7 +36,7 @@ class RoomTest {
     }
 
     @Test
-    void turnLeft() {
+    void turnLeftTest() {
         Room room = new Room(10);
         room.robot.setCurDirection(direction.SOUTH);
         room.turnLeft();
@@ -50,7 +50,7 @@ class RoomTest {
     }
 
     @Test
-    void moveS() throws Exception {
+    void moveSTest() throws Exception {
         Room room = new Room(10);
         room.robot.setCurDirection(direction.NORTH);
         room.penDown();
@@ -93,13 +93,11 @@ class RoomTest {
     }
 
     @Test
-    void printRoom() {
+    void printRoomTest() {
         Room room = new Room(10);
         for (int i =0 ; i<10 ; i++){
             room.room[0][i] = true;
         }
-
-        System.out.println(room.printRoom());
         String finalRoom =  "9                     \n"+ "8                     \n"+ "7                     \n"+
                             "6                     \n"+ "5                     \n"+ "4                     \n"+
                             "3                     \n"+ "2                     \n"+ "1                     \n"+
@@ -110,7 +108,7 @@ class RoomTest {
 
 
     @Test
-    void printCurrentPosition() throws Exception {
+    void printCurrentPositionTest() throws Exception {
         Room room = new Room(10);
         try{
             room.robot.setCurX(0);
@@ -132,7 +130,7 @@ class RoomTest {
 
     }
     @Test
-    void initialize() throws Exception {
+    void initializeTest() throws Exception {
         Room room  = new Room(10);
         try {
             room.initialize(10);
@@ -140,7 +138,6 @@ class RoomTest {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
         assertEquals(direction.NORTH, room.robot.getCurDirection());
         assertEquals(penPosition.UP,room.robot.getCurPenPosition());
         assertEquals(0, room.robot.getCurX());
@@ -148,4 +145,12 @@ class RoomTest {
         assertEquals(10, room.robot.getMaxX());
         assertEquals(10,room.robot.getMaxY());
     }
+
+    @Test
+    void stopTest(){
+        Room room = new Room(10);
+        Boolean running = room.stop();
+        assertFalse(running);
+    }
 }
+
