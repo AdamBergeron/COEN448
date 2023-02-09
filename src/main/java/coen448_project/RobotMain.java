@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class RobotMain {
 
 	public static void main(String[] args) {
+		Boolean running  = true;
 		Scanner s = new Scanner(System.in);
 		int n;
 		char c;
@@ -54,6 +55,7 @@ public class RobotMain {
 					break;
 				case('q'):
 				case('Q'):
+					running = RobotRoom.stop();
 					break;
 				case('i'):
 				case('I'):
@@ -68,7 +70,6 @@ public class RobotMain {
 				default:
 					System.out.println("Invalid command.");
 			}
-		} while( c!='q' && c!='Q');
+		} while(running);
 	}
-
 }

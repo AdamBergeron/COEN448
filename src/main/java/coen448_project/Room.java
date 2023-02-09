@@ -1,8 +1,8 @@
 package coen448_project;
 
 public class Room {
-	private boolean[][] room;
-	private WalkingRobot robot;
+	public boolean[][] room;
+	public WalkingRobot robot;
 	
 	public Room(int roomSize) {
 		this.room = new boolean[roomSize][roomSize];
@@ -71,8 +71,6 @@ public class Room {
 					break;
 			}
 		}
-
-
 	}
 	public String printRoom() {
 		int maxX = robot.getMaxX();
@@ -110,9 +108,10 @@ public class Room {
 			);
 	}
 	
-	public void stop() {
+	public Boolean stop() {
 		// Might not be needed
-	}
+        return false;
+    }
 	
 	public void initialize(int n) throws Exception {
 		this.robot.setCurDirection(direction.NORTH);
