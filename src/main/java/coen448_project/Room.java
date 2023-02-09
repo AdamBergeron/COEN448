@@ -1,7 +1,7 @@
 package coen448_project;
 
 public class Room {
-	private boolean[][] room;
+	public boolean[][] room;
 	public WalkingRobot robot;
 	
 	public Room(int roomSize) {
