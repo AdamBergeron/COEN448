@@ -18,7 +18,7 @@ public class WalkingRobot {
 		return curX;
 	}
 	public void setCurX(int curX) throws Exception {
-		if (curX > this.maxX) {
+		if (curX >= this.maxX) {
 			throw new Exception("curX cannot be greater than maxX");
 		}
 		this.curX = curX;
@@ -27,7 +27,7 @@ public class WalkingRobot {
 		return curY;
 	}
 	public void setCurY(int curY) throws Exception {
-		if (curY > this.maxY) {
+		if (curY >= this.maxY) {
 			throw new Exception("curY cannot be greater than maxY");
 		}
 		this.curY = curY;

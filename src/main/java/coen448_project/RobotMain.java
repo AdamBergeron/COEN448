@@ -4,14 +4,31 @@ import java.util.Scanner;
 public class RobotMain {
 
 	public static void main(String[] args) {
-		Boolean running  = true;
 		Scanner s = new Scanner(System.in);
+		Room RobotRoom = new Room(1);
 		int n;
-		char c;
+		Character c;
 		String input;
-		System.out.print("Input Size of Room: ");
-		n = s.nextInt();
-		Room RobotRoom = new Room(n);
+		do {
+			System.out.print("Input a Command: ");
+			input = s.next();
+			c = input.charAt(0);
+			if (c.equals('i') || c.equals('I')){
+				try {
+					if (input.length() > 1) n = Integer.parseInt(input.substring(1).strip());
+					else n = s.nextInt();
+					RobotRoom.initialize(n);
+					break;
+				} catch(Exception e) {
+					System.out.println("!!!Invalid Init!!!");
+					continue;
+				}
+			}
+			System.out.println("Please init the room before inputing any commands.");
+			continue;
+
+		} while(true);
+
 		do {
 			System.out.print("Input a Command: ");
 			input = s.next();
@@ -37,12 +54,13 @@ public class RobotMain {
 				case('M'):
 					try {
 						if (input.length() > 1)
-							n = Character.getNumericValue(input.charAt(1));
+							n = Integer.parseInt(input.substring(1).strip());
 						else
 							n = s.nextInt();
 						RobotRoom.moveS(n);
 					} catch(Exception e) {
 						System.out.println("!!!Goes out of bounds!!!");
+						continue;
 					}
 					break;
 				case('p'):
@@ -55,21 +73,22 @@ public class RobotMain {
 					break;
 				case('q'):
 				case('Q'):
-					running = RobotRoom.stop();
 					break;
 				case('i'):
 				case('I'):
 					try {
-						if (input.length() > 1) n = Character.getNumericValue(input.charAt(1));
+						if (input.length() > 1) n = Integer.parseInt(input.substring(1).strip());
 						else n = s.nextInt();
 						RobotRoom.initialize(n);
 					} catch(Exception e) {
-						System.out.println("!!!Goes out of bounds!!!");
+						System.out.println("!!!Invalid Init!!!");
+						continue;
 					}
 					break;
 				default:
 					System.out.println("Invalid command.");
 			}
-		} while(running);
+		} while( c!='q' && c!='Q');
 	}
+
 }
