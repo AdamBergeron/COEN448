@@ -56,14 +56,12 @@ class RoomTest {
         room.penDown();
         room.robot.setCurX(1);
         room.robot.setCurY(1);
-
         try{
             room.moveS(5);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
         System.out.println(room.printRoom());
 
         for (int i = 1 ; i < 6 ; i++){
@@ -72,7 +70,6 @@ class RoomTest {
         assertEquals(direction.NORTH, room.robot.getCurDirection());
         assertEquals(1,room.robot.getCurX());
         assertEquals(6, room.robot.getCurY());
-
         room.penUp();
         room.robot.setCurDirection(direction.EAST);
         try{
@@ -81,8 +78,6 @@ class RoomTest {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-
         for (int i = 1 ; i < 6 ; i++){
             assertFalse(room.room[6][i]);
         }
@@ -129,6 +124,7 @@ class RoomTest {
         assertEquals(expectedString, room.printCurrentPosition());
 
     }
+
     @Test
     void initializeTest() throws Exception {
         Room room  = new Room(10);
@@ -145,7 +141,6 @@ class RoomTest {
         assertEquals(10, room.robot.getMaxX());
         assertEquals(10,room.robot.getMaxY());
     }
-
     @Test
     void stopTest(){
         Room room = new Room(10);
