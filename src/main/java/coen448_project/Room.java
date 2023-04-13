@@ -125,6 +125,7 @@ public class Room {
         return false;
     }
 	public String replay() {
+		commands.add("H");
 		String s = "";
 		for(String cmd : commands){
 			s = s + cmd + " | ";

@@ -195,5 +195,37 @@ class RoomTest {
         Boolean running = room.stop();
         assertFalse(running);
     }
+
+    @Test
+    void replayTestNoError() throws Exception {
+        Room room = new Room(10);
+        String s = "";
+        room.turnRight();
+        room.turnLeft();
+        room.penUp();
+        room.penDown();
+        room.moveS(4);
+        room.printRoom();
+        room.printCurrentPosition();
+        s += "R | L | U | D | M 4 | P | C | H | ";
+        String commands = room.replay();
+        assertEquals(s, commands);
+    }
+
+    @Test
+    void replayTestOutOfBounds(){
+        Room room = new Room(10);
+        String s = "";
+        room.turnLeft();
+        try {
+            room.moveS(2);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        String commands = room.replay();
+        s += "L | M 2 | H | ";
+        assertEquals(s, commands);
+    }
 }
 
