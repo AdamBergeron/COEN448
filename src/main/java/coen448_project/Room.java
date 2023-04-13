@@ -1,20 +1,26 @@
 package coen448_project;
 
+import java.util.*;
+
 public class Room {
 	public boolean[][] room;
+	public List<String> commands;
 	public WalkingRobot robot;
 	
 	public Room(int roomSize) {
 		this.room = new boolean[roomSize][roomSize];
 		this.robot = new WalkingRobot(roomSize, roomSize);
+		this.commands = new ArrayList<String>();
 	}
 	
 	public void penUp() {
 		this.robot.setCurPenPosition(penPosition.UP);
+		commands.add("U");
 	}
 	
 	public void penDown() {
 		this.robot.setCurPenPosition(penPosition.DOWN);
+		commands.add("D");
 	}
 	
 	public void turnRight() {
@@ -23,6 +29,7 @@ public class Room {
 		else if (curDirection == direction.EAST) robot.setCurDirection(direction.SOUTH);
 		else if (curDirection == direction.SOUTH) robot.setCurDirection(direction.WEST);
 		else if (curDirection == direction.WEST) robot.setCurDirection(direction.NORTH);
+		commands.add("R");
 	}
 	
 	public void turnLeft() {
@@ -31,10 +38,12 @@ public class Room {
 		else if (curDirection == direction.EAST) robot.setCurDirection(direction.NORTH);
 		else if (curDirection == direction.SOUTH) robot.setCurDirection(direction.EAST);
 		else if (curDirection == direction.WEST) robot.setCurDirection(direction.SOUTH);
+		commands.add("L");
 		
 	}
 	
 	public void moveS(int s) throws Exception {
+		commands.add("M "+Integer.toString(s));
 		penPosition penPos = this.robot.getCurPenPosition();
 		direction curDirection = this.robot.getCurDirection();
 
@@ -94,11 +103,13 @@ public class Room {
 		}
 
 		roomString.append("\n"); // new line
-
+		commands.add("P");
 		return roomString.toString();
+
 	}
 
 	public String printCurrentPosition() {
+		commands.add("C");
 		return String.format(
 				"Position: %d, %d - Pen: %s – Facing: %s",
 				this.robot.getCurX(),
@@ -106,14 +117,23 @@ public class Room {
 				this.robot.getCurPenPosition(),
 				this.robot.getCurDirection()
 			);
+
 	}
 	
 	public Boolean stop() {
 		// Might not be needed
         return false;
     }
+	public String replay() {
+		String s = "";
+		for(String cmd : commands){
+			s = s + cmd + " | ";
+		}
+		return s;
+	}
 	
 	public void initialize(int n) throws Exception {
+		commands.add("I "+Integer.toString(n));
 		this.robot.setCurDirection(direction.NORTH);
 		this.robot.setCurPenPosition(penPosition.UP);
 		this.robot.setCurX(0);

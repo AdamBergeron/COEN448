@@ -85,6 +85,10 @@ public class RobotMain {
 						continue;
 					}
 					break;
+				case('h'):
+				case('H'):
+					System.out.println(RobotRoom.replay());
+					break;
 				default:
 					System.out.println("Invalid command.");
 			}
