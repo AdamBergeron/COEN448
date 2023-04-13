@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Room</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">coen448_project</a>
+</div>
+
+<h1>Coverage Summary for Class: Room (coen448_project)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Room</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (32/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.5%
+  </span>
+  <span class="absValue">
+    (74/80)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Room$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (32/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.6%
+  </span>
+  <span class="absValue">
+    (75/81)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package coen448_project;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public class Room {
+&nbsp;	public boolean[][] room;
+&nbsp;	public List&lt;String&gt; commands;
+&nbsp;	public WalkingRobot robot;
+&nbsp;	
+<b class="fc">&nbsp;	public Room(int roomSize) {</b>
+<b class="fc">&nbsp;		this.room = new boolean[roomSize][roomSize];</b>
+<b class="fc">&nbsp;		this.robot = new WalkingRobot(roomSize, roomSize);</b>
+<b class="fc">&nbsp;		this.commands = new ArrayList&lt;String&gt;();</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void penUp() {
+<b class="fc">&nbsp;		this.robot.setCurPenPosition(penPosition.UP);</b>
+<b class="fc">&nbsp;		commands.add(&quot;U&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void penDown() {
+<b class="fc">&nbsp;		this.robot.setCurPenPosition(penPosition.DOWN);</b>
+<b class="fc">&nbsp;		commands.add(&quot;D&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void turnRight() {
+<b class="fc">&nbsp;		direction curDirection = robot.getCurDirection();</b>
+<b class="fc">&nbsp;		if (curDirection == direction.NORTH) robot.setCurDirection(direction.EAST);</b>
+<b class="fc">&nbsp;		else if (curDirection == direction.EAST) robot.setCurDirection(direction.SOUTH);</b>
+<b class="fc">&nbsp;		else if (curDirection == direction.SOUTH) robot.setCurDirection(direction.WEST);</b>
+<b class="pc">&nbsp;		else if (curDirection == direction.WEST) robot.setCurDirection(direction.NORTH);</b>
+<b class="fc">&nbsp;		commands.add(&quot;R&quot;);</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void turnLeft() {
+<b class="fc">&nbsp;		direction curDirection = robot.getCurDirection();</b>
+<b class="fc">&nbsp;		if (curDirection == direction.NORTH) robot.setCurDirection(direction.WEST);</b>
+<b class="fc">&nbsp;		else if (curDirection == direction.EAST) robot.setCurDirection(direction.NORTH);</b>
+<b class="fc">&nbsp;		else if (curDirection == direction.SOUTH) robot.setCurDirection(direction.EAST);</b>
+<b class="pc">&nbsp;		else if (curDirection == direction.WEST) robot.setCurDirection(direction.SOUTH);</b>
+<b class="fc">&nbsp;		commands.add(&quot;L&quot;);</b>
+&nbsp;		
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void moveS(int s) throws Exception {
+<b class="fc">&nbsp;		commands.add(&quot;M &quot;+Integer.toString(s));</b>
+<b class="fc">&nbsp;		penPosition penPos = this.robot.getCurPenPosition();</b>
+<b class="fc">&nbsp;		direction curDirection = this.robot.getCurDirection();</b>
+&nbsp;
+<b class="fc">&nbsp;		int oldX = this.robot.getCurX();</b>
+<b class="fc">&nbsp;		int oldY = this.robot.getCurY();</b>
+&nbsp;
+<b class="pc">&nbsp;		switch(curDirection){</b>
+&nbsp;			case EAST:
+<b class="fc">&nbsp;				this.robot.setCurX(oldX+s);</b>
+<b class="fc">&nbsp;				break;</b>
+&nbsp;			case WEST:
+<b class="fc">&nbsp;				this.robot.setCurX(oldX+-s);</b>
+<b class="fc">&nbsp;				break;</b>
+&nbsp;			case NORTH:
+<b class="fc">&nbsp;				this.robot.setCurY(oldY+s);</b>
+<b class="fc">&nbsp;				break;</b>
+&nbsp;			case SOUTH:
+<b class="nc">&nbsp;				this.robot.setCurY(oldY-s);</b>
+&nbsp;				break;
+&nbsp;		}
+<b class="fc">&nbsp;		if(penPos == penPosition.DOWN){</b>
+<b class="pc">&nbsp;			switch(curDirection) {</b>
+&nbsp;				case EAST:
+<b class="nc">&nbsp;					for (int i = oldX; i &lt; robot.getCurX(); i++) room[oldY][i] = true;</b>
+<b class="nc">&nbsp;					break;</b>
+&nbsp;				case WEST:
+<b class="nc">&nbsp;					for(int i=oldX; i&gt;robot.getCurX(); i--) room[oldY][i] = true;</b>
+<b class="nc">&nbsp;					break;</b>
+&nbsp;				case NORTH:
+<b class="fc">&nbsp;					for(int i=oldY; i&lt;robot.getCurY(); i++) room[i][oldX] = true;</b>
+<b class="fc">&nbsp;					break;</b>
+&nbsp;				case SOUTH:
+<b class="nc">&nbsp;					for(int i=oldY; i&gt;robot.getCurY(); i--) room[i][oldX] = true;</b>
+&nbsp;					break;
+&nbsp;			}
+&nbsp;		}
+&nbsp;	}
+&nbsp;	public String printRoom() {
+<b class="fc">&nbsp;		int maxX = robot.getMaxX();</b>
+<b class="fc">&nbsp;		int maxY = robot.getMaxY();</b>
+<b class="fc">&nbsp;		StringBuilder roomString = new StringBuilder();</b>
+&nbsp;
+<b class="fc">&nbsp;		for(int i=maxY-1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;			roomString.append(i+&quot; &quot;);</b>
+<b class="fc">&nbsp;			for(int j=0; j &lt; maxX; j++) {</b>
+<b class="fc">&nbsp;				boolean penned = this.room[i][j];</b>
+<b class="fc">&nbsp;				if (penned) roomString.append(&quot;* &quot;);</b>
+<b class="fc">&nbsp;				else roomString.append(&quot;  &quot;);</b>
+&nbsp;			}
+<b class="fc">&nbsp;			roomString.append(&quot;\n&quot;); // new line</b>
+&nbsp;		}
+&nbsp;
+<b class="fc">&nbsp;		roomString.append(&quot; &quot;);</b>
+<b class="fc">&nbsp;		for(int k=0; k&lt;maxX; k++) {</b>
+<b class="fc">&nbsp;			roomString.append(&quot; &quot;);</b>
+<b class="fc">&nbsp;			roomString.append(k);</b>
+&nbsp;		}
+&nbsp;
+<b class="fc">&nbsp;		roomString.append(&quot;\n&quot;); // new line</b>
+<b class="fc">&nbsp;		commands.add(&quot;P&quot;);</b>
+<b class="fc">&nbsp;		return roomString.toString();</b>
+&nbsp;
+&nbsp;	}
+&nbsp;
+&nbsp;	public String printCurrentPosition() {
+<b class="fc">&nbsp;		commands.add(&quot;C&quot;);</b>
+<b class="fc">&nbsp;		return String.format(</b>
+&nbsp;				&quot;Position: %d, %d - Pen: %s – Facing: %s&quot;,
+<b class="fc">&nbsp;				this.robot.getCurX(),</b>
+<b class="fc">&nbsp;				this.robot.getCurY(),</b>
+<b class="fc">&nbsp;				this.robot.getCurPenPosition(),</b>
+<b class="fc">&nbsp;				this.robot.getCurDirection()</b>
+&nbsp;			);
+&nbsp;
+&nbsp;	}
+&nbsp;	
+&nbsp;	public Boolean stop() {
+&nbsp;		// Might not be needed
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;	public String replay() {
+<b class="fc">&nbsp;		commands.add(&quot;H&quot;);</b>
+<b class="fc">&nbsp;		String s = &quot;&quot;;</b>
+<b class="fc">&nbsp;		for(String cmd : commands){</b>
+<b class="fc">&nbsp;			s = s + cmd + &quot; | &quot;;</b>
+<b class="fc">&nbsp;		}</b>
+<b class="fc">&nbsp;		return s;</b>
+&nbsp;	}
+&nbsp;	
+&nbsp;	public void initialize(int n) throws Exception {
+<b class="fc">&nbsp;		commands.add(&quot;I &quot;+Integer.toString(n));</b>
+<b class="fc">&nbsp;		this.robot.setCurDirection(direction.NORTH);</b>
+<b class="fc">&nbsp;		this.robot.setCurPenPosition(penPosition.UP);</b>
+<b class="fc">&nbsp;		this.robot.setCurX(0);</b>
+<b class="fc">&nbsp;		this.robot.setCurY(0);</b>
+<b class="fc">&nbsp;		this.robot.setMaxX(n);</b>
+<b class="fc">&nbsp;		this.robot.setMaxY(n);</b>
+<b class="fc">&nbsp;		this.room = new boolean[n][n];</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 22:57</div>
+</div>
+</body>
+</html>
