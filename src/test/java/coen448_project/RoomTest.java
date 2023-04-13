@@ -93,6 +93,49 @@ class RoomTest {
     }
 
     @Test
+    void invalidMoveSTest() throws Exception {
+        Room room = new Room(10);
+        room.robot.setCurDirection(direction.NORTH);
+        room.penDown();
+        room.robot.setCurX(1);
+        room.robot.setCurY(1);
+
+        try{
+            room.moveS(20);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(room.printRoom());
+
+        for (int i = 1 ; i < 10 ; i++){
+            assertFalse(room.room[i][1]);
+        }
+        assertEquals(direction.NORTH, room.robot.getCurDirection());
+        assertEquals(1,room.robot.getCurX());
+        assertEquals(1, room.robot.getCurY());
+
+        room.penUp();
+        room.robot.setCurDirection(direction.EAST);
+        try{
+            room.moveS(20);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+        for (int i = 1 ; i < 10 ; i++){
+            assertFalse(room.room[1][i]);
+        }
+
+        assertEquals(direction.EAST, room.robot.getCurDirection());
+        assertEquals(1,room.robot.getCurX());
+        assertEquals(1, room.robot.getCurY());
+    }
+
+    @Test
     void printRoomTest() {
         Room room = new Room(10);
         for (int i =0 ; i<10 ; i++){
