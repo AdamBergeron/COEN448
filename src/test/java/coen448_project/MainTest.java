@@ -11,6 +11,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class MainTest {
 
     @Test
+    public void testNoInitCommand() {
+        ByteArrayInputStream in = new ByteArrayInputStream("i 5\nx\nq\n".getBytes());
+        System.setIn(in);
+        RobotMain.main(null);
+    }
+    @Test
     public void testInitialize() {
         // Test valid input
         ByteArrayInputStream in = new ByteArrayInputStream("i 5\nq\n".getBytes());
@@ -79,10 +85,18 @@ public class MainTest {
     }
 
     @Test
+    public void testReplayCommand() {
+        ByteArrayInputStream in = new ByteArrayInputStream("i 5\nh\nq\n".getBytes());
+        System.setIn(in);
+        RobotMain.main(null);
+    }
+
+    @Test
     public void testInvalidCommand() {
         ByteArrayInputStream in = new ByteArrayInputStream("i 5\nx\nq\n".getBytes());
         System.setIn(in);
         RobotMain.main(null);
     }
+
 
 }
